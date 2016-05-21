@@ -15,10 +15,17 @@ public class GameRenderer {
         myWorld = world;
         cam = new OrthographicCamera();
         cam.setToOrtho(true, 240, 170);
-
+        initGameObjects();
+        initAssets();
     }
 
     public void render(){
 
+    }
+
+    private void initGameObjects() {
+    }
+
+    private void initAssets() {
     }
 }
