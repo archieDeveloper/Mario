@@ -11,8 +11,6 @@ import com.mygdx.game.gameWorld.GameWorld;
  */
 public class GameScreen implements Screen {
 
-
-
     private GameWorld world;
     private GameRenderer renderer;
 

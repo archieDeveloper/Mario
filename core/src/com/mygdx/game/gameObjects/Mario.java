@@ -20,6 +20,10 @@ public class Mario {
         velocity = new Vector2(0, 0);
     }
 
+    public void update(float delta) {
+
+    }
+
     public void onClick(){
         velocity.y = -140;
     }
