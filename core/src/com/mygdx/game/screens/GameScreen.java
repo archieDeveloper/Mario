@@ -1,6 +1,8 @@
 package com.mygdx.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.mygdx.game.MBHelpers.InputHandler;
 import com.mygdx.game.gameWorld.GameRenderer;
 import com.mygdx.game.gameWorld.GameWorld;
 
@@ -17,6 +19,7 @@ public class GameScreen implements Screen {
     public GameScreen(){
         world = new GameWorld();
         renderer = new GameRenderer(world);
+        Gdx.input.setInputProcessor(new InputHandler(world.getMario()));
     }
     @Override
     public void show() {

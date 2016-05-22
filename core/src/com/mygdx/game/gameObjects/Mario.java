@@ -6,10 +6,10 @@ import com.badlogic.gdx.math.Vector2;
  * Created by Legendary on 21.05.2016.
  */
 public class Mario {
+
     private Vector2 position;
     private Vector2 velocity;
 
-    private float rotation;
     private int width;
     private int height;
 
@@ -18,7 +18,6 @@ public class Mario {
         this.height = height;
         position = new Vector2(x, y);
         velocity = new Vector2(0, 0);
-
     }
 
     public void onClick(){
@@ -41,7 +40,4 @@ public class Mario {
         return height;
     }
 
-    public float getRotation() {
-        return rotation;
-    }
 }
