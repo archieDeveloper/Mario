@@ -1,5 +1,6 @@
 package com.mygdx.game.gameObjects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -21,11 +22,19 @@ public class Mario {
     }
 
     public void update(float delta) {
-
+        if (Gdx.input.isKeyPressed(22)) {
+            runRight(delta);
+        } else if (Gdx.input.isKeyPressed(21)){
+            runLeft(delta);
+        }
     }
 
-    public void onClick(){
-        velocity.y = -140;
+    public void runRight(float delta) {
+        position.x += 100 * delta;
+    }
+
+    public void runLeft(float delta) {
+        position.x -= 100 * delta;
     }
 
     public float getX() {

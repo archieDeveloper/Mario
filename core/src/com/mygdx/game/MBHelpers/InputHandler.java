@@ -20,6 +20,9 @@ public class InputHandler implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         Gdx.app.log("Нажата клавиша", valueOf(keycode));
+        /*if (keycode == 22) {
+            myMario.runRight();
+        }*/
         return true;
     }
 

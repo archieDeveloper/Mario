@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Matrix4;
 import com.mygdx.game.MBHelpers.AssetLoader;
 import com.mygdx.game.gameObjects.Mario;
 
@@ -15,6 +16,8 @@ public class GameRenderer {
 
     private GameWorld myWorld;
     private OrthographicCamera cam;
+    private final float CAMERA_WIDTH = 240;
+    private final float CAMERA_HEIGHT = 170;
 
     private SpriteBatch batcher;
 
@@ -25,17 +28,18 @@ public class GameRenderer {
     public GameRenderer(GameWorld world) {
         myWorld = world;
         cam = new OrthographicCamera();
-        cam.setToOrtho(true, 240, 170);
+        cam.setToOrtho(true, CAMERA_WIDTH, CAMERA_HEIGHT);
         batcher = new SpriteBatch();
         batcher.setProjectionMatrix(cam.combined);
         initGameObjects();
         initAssets();
     }
 
-    public void render(){
+    public void render() {
+        cam.update();
+        batcher.setProjectionMatrix(cam.combined);
         Gdx.gl.glClearColor(255, 255, 255, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batcher.begin();
         batcher.draw(
             marioDownTime,
@@ -50,6 +54,9 @@ public class GameRenderer {
             0
         );
         batcher.end();
+        if (cam.position.x < mario.getX()) {
+            cam.position.x = mario.getX();
+        }
     }
 
     private void initGameObjects() {
