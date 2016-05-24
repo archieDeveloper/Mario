@@ -16,8 +16,8 @@ public class AssetLoader {
     public static void load() {
         texture = new Texture(Gdx.files.internal("data/texture.png"));
         texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-        mario = new TextureRegion(texture, 0, 0, 13, 26);
-        mario.flip(false, true);
+        mario = new TextureRegion(texture, 0, 0, 24, 32);
+        mario.flip(false, false);
     }
 
     public static void dispose() {

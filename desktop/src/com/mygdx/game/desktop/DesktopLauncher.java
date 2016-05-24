@@ -5,11 +5,11 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mygdx.game.MarioGame;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Zombie Bird";
-		config.width = 480;
-		config.height = 320;
-		new LwjglApplication(new MarioGame(), config);
-	}
+    public static void main (String[] arg) {
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.title = "Mario";
+        config.width = 800;
+        config.height = 600;
+        new LwjglApplication(new MarioGame(), config);
+    }
 }

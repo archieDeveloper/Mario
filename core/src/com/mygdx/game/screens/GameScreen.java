@@ -2,8 +2,10 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.mygdx.game.MBHelpers.InputHandler;
-import com.mygdx.game.gameWorld.GameRenderer;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.gameWorld.GameWorld;
 
 /**
@@ -11,13 +13,13 @@ import com.mygdx.game.gameWorld.GameWorld;
  */
 public class GameScreen implements Screen {
 
+    private Stage stage;
     private GameWorld world;
-    private GameRenderer renderer;
 
-    public GameScreen(){
-        world = new GameWorld();
-        renderer = new GameRenderer(world);
-        Gdx.input.setInputProcessor(new InputHandler(world.getMario()));
+    public GameScreen(SpriteBatch batch) {
+        stage = new Stage(new ScreenViewport(), batch);
+        Gdx.input.setInputProcessor(stage);
+        world = new GameWorld(stage);
     }
     @Override
     public void show() {
@@ -27,12 +29,15 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         world.update(delta);
-        renderer.render();
+        Gdx.gl.glClearColor(0.360784314f, 0.580392157f, 0.988235294f, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.act(delta);
+        stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -52,6 +57,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }
