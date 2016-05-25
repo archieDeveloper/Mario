@@ -35,6 +35,7 @@ public class Ground extends Actor {
     @Override
     public void draw (Batch batch, float parentAlpha) {
         batch.draw(region, getX(), getY());
+        renderer.setProjectionMatrix(batch.getProjectionMatrix());
         batch.end();
         renderer.begin(ShapeRenderer.ShapeType.Line);
         renderer.setColor(Color.BLUE);

@@ -1,5 +1,6 @@
 package com.mygdx.game.gameWorld;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.gameObjects.Ground;
 import com.mygdx.game.gameObjects.Mario;
@@ -13,15 +14,18 @@ import java.util.List;
 public class GameWorld {
 
     private Stage myStage;
+    private Camera myCamera;
 
     private Mario mario;
     private List<Ground> groundCollection;
 
     public GameWorld(Stage stage) {
         myStage = stage;
+        myCamera = stage.getCamera();
         groundCollection = new ArrayList<Ground>();
         createGround();
         mario = new Mario(50, 500, 24, 32, groundCollection);
+        myStage.setKeyboardFocus(mario);
         myStage.addActor(mario);
     }
 
@@ -53,6 +57,9 @@ public class GameWorld {
 
     public void update(float delta) {
         mario.update(delta);
+        if (mario.getX() > myCamera.position.x) {
+            myCamera.position.x = mario.getX();
+        }
     }
 
     public Mario getMario() {

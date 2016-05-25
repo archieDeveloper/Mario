@@ -1,6 +1,7 @@
 package com.mygdx.game.gameObjects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -9,6 +10,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.mygdx.game.MBHelpers.AssetLoader;
 
 import java.util.List;
@@ -28,6 +31,8 @@ public class Mario extends Actor {
     Rectangle bounds;
     ShapeRenderer renderer;
 
+    Boolean isGround = false;
+
     public Mario(int x, int y, int width, int height, List<Ground> grounds) {
         this.grounds = grounds;
         region = AssetLoader.mario;
@@ -38,6 +43,17 @@ public class Mario extends Actor {
         setWidth(width);
         setHeight(height);
         renderer = new ShapeRenderer();
+
+        addListener(new InputListener() {
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                if (keycode == Input.Keys.X && isGround) {
+                    jump();
+                    isGround = false;
+                }
+                return true;
+            }
+        });
     }
 
     public void update(float delta) {
@@ -45,11 +61,15 @@ public class Mario extends Actor {
         checkPlatformCollisions(delta);
         moveBy(velocity.x * delta, velocity.y * delta);
         if (Gdx.input.isKeyPressed(22)) {
-            setPosition(getX()+(100*delta), getY());
+            velocity.x += 100;
+            //setPosition(getX()+(300*delta), getY());
         }
         if (Gdx.input.isKeyPressed(21)) {
-            setPosition(getX()-(100*delta), getY());
+            velocity.x -= 100;
+            //setPosition(getX()-(300*delta), getY());
         }
+
+        velocity.x = (float)(velocity.x * 0.8);
 
         bounds.setPosition(getX(), getY());
     }
@@ -73,17 +93,23 @@ public class Mario extends Actor {
             if (getY() > ground.getY()) {
                 if (bounds.overlaps(ground.bounds)) {
                     setPosition(getX(), ground.getY() + ground.getHeight());
+                    isGround = true;
                     velocity.y = 0;
-                    break;
+                    return;
                 }
             }
         }
+        isGround = false;
+    }
+
+    private void jump () {
+        velocity.y += 500;
     }
 
     @Override
     public void draw (Batch batch, float parentAlpha) {
         batch.draw(region, getX(), getY());
-        //renderer.setProjectionMatrix(batch.getProjectionMatrix());
+        renderer.setProjectionMatrix(batch.getProjectionMatrix());
         batch.end();
         renderer.begin(ShapeRenderer.ShapeType.Line);
         renderer.setColor(Color.RED);
