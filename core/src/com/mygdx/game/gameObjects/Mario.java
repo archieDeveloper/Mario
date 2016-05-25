@@ -1,10 +1,8 @@
 package com.mygdx.game.gameObjects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.MBHelpers.AssetLoader;
 
@@ -20,7 +18,12 @@ public class Mario extends Actor {
     }
 
     public void update(float delta) {
-
+        if (Gdx.input.isKeyPressed(22)) {
+            setPosition(getX()+(100*delta), getY());
+        }
+        if (Gdx.input.isKeyPressed(21)) {
+            setPosition(getX()-(100*delta), getY());
+        }
     }
 
     @Override

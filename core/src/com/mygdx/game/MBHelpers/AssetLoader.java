@@ -11,13 +11,13 @@ public class AssetLoader {
 
     public static Texture texture;
 
-    public static TextureRegion mario;
+    public static TextureRegion mario, ground;
 
     public static void load() {
         texture = new Texture(Gdx.files.internal("data/texture.png"));
         texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         mario = new TextureRegion(texture, 0, 0, 24, 32);
-        mario.flip(false, false);
+        ground = new TextureRegion(texture, 0, 50, 32, 32);
     }
 
     public static void dispose() {

@@ -1,10 +1,7 @@
 package com.mygdx.game.gameWorld;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.gameObjects.Ground;
 import com.mygdx.game.gameObjects.Mario;
 
 /**
@@ -20,7 +17,34 @@ public class GameWorld {
         myStage = stage;
         mario = new Mario();
         mario.setPosition(50, 70);
-        stage.addActor(mario);
+        myStage.addActor(mario);
+        createGround();
+    }
+
+    public void createGround() {
+        for (int j = 0; j < 2; j++) {
+            for (int i = 0; i < 10; i++) {
+                Ground ground = new Ground();
+                ground.setPosition(i*32, j*32);
+                myStage.addActor(ground);
+            }
+        }
+
+        for (int j = 0; j < 2; j++) {
+            for (int i = 12; i < 102; i++) {
+                Ground ground = new Ground();
+                ground.setPosition(i*32, j*32);
+                myStage.addActor(ground);
+            }
+        }
+
+        for (int j = 4; j < 5; j++) {
+            for (int i = 5; i < 10; i++) {
+                Ground ground = new Ground();
+                ground.setPosition(i*32, j*32);
+                myStage.addActor(ground);
+            }
+        }
     }
 
     public void update(float delta) {

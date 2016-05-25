@@ -1,37 +1,27 @@
 package com.mygdx.game.gameObjects;
 
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.game.MBHelpers.AssetLoader;
 
 /**
  * Created by archie on 24.05.16.
  */
-public class Ground {
+public class Ground extends Actor {
 
+    TextureRegion region;
 
-    private Vector2 position;
-
-    private int width;
-    private int height;
-
-    public Ground(float x, float y, int width, int height) {
-        this.width = width;
-        this.height = height;
-        position = new Vector2(x, y);
+    public Ground() {
+        region = AssetLoader.ground;
     }
 
-    public float getX() {
-        return position.x;
+    public void update(float delta) {
+
     }
 
-    public float getY() {
-        return position.y;
-    }
-
-    public float getWidth() {
-        return width;
-    }
-
-    public float getHeight() {
-        return height;
+    @Override
+    public void draw (Batch batch, float parentAlpha) {
+        batch.draw(region, getX(), getY());
     }
 }
