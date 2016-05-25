@@ -4,6 +4,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.gameObjects.Ground;
 import com.mygdx.game.gameObjects.Mario;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Legendary on 21.05.2016.
  */
@@ -12,36 +15,37 @@ public class GameWorld {
     private Stage myStage;
 
     private Mario mario;
+    private List<Ground> groundCollection;
 
     public GameWorld(Stage stage) {
         myStage = stage;
-        mario = new Mario();
-        mario.setPosition(50, 70);
-        myStage.addActor(mario);
+        groundCollection = new ArrayList<Ground>();
         createGround();
+        mario = new Mario(50, 500, 24, 32, groundCollection);
+        myStage.addActor(mario);
     }
 
     public void createGround() {
         for (int j = 0; j < 2; j++) {
             for (int i = 0; i < 10; i++) {
-                Ground ground = new Ground();
-                ground.setPosition(i*32, j*32);
+                Ground ground = new Ground(i*32, j*32, 32, 32);
+                groundCollection.add(ground);
                 myStage.addActor(ground);
             }
         }
 
         for (int j = 0; j < 2; j++) {
             for (int i = 12; i < 102; i++) {
-                Ground ground = new Ground();
-                ground.setPosition(i*32, j*32);
+                Ground ground = new Ground(i*32, j*32, 32, 32);
+                groundCollection.add(ground);
                 myStage.addActor(ground);
             }
         }
 
         for (int j = 4; j < 5; j++) {
             for (int i = 5; i < 10; i++) {
-                Ground ground = new Ground();
-                ground.setPosition(i*32, j*32);
+                Ground ground = new Ground(i*32, j*32, 32, 32);
+                groundCollection.add(ground);
                 myStage.addActor(ground);
             }
         }
